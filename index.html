@@ -1,0 +1,23 @@
+<pre>
+#!/bin/bash
+
+cd ~
+mkdir java
+cd java
+wget https://github.com/fn2006/PollyMC/releases/download/8.0/PollyMC-Linux-x86_64.AppImage
+chmod 777 PollyMC-Linux-x86_64.AppImage
+printf "\n\nalias pollymc=~/java/PollyMC-Linux-x86_64.AppImage" >> ~/.bashrc
+
+wget https://builds.openlogic.com/downloadJDK/openlogic-openjdk/21.0.3+9/openlogic-openjdk-21.0.3+9-linux-x64.tar.gz
+wget https://builds.openlogic.com/downloadJDK/openlogic-openjdk/17.0.11+9/openlogic-openjdk-17.0.11+9-linux-x64.tar.gz
+wget https://builds.openlogic.com/downloadJDK/openlogic-openjdk/11.0.23+9/openlogic-openjdk-11.0.23+9-linux-x64.tar.gz
+wget https://builds.openlogic.com/downloadJDK/openlogic-openjdk/8u412-b08/openlogic-openjdk-8u412-b08-linux-x64.tar.gz
+
+for i in *.tar.gz;
+do
+    tar -xvf "${i}"
+    rm "${i}"
+done
+
+exit
+</pre>
