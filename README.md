@@ -1,3 +1,3 @@
 ```
-curl https://cupomaz.github.io/pollymc-install/ | sh
+curl https://cupomaz.github.io/pollymc-install/ | bash
 ```
