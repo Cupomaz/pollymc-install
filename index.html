@@ -1,21 +1,44 @@
 #!/bin/bash
 
-cd ~
-mkdir java
-cd java
+mkdir -p ~/.local/share/PollyMC
+cd ~/.local/share/PollyMC
 wget https://github.com/fn2006/PollyMC/releases/download/8.0/PollyMC-Linux-x86_64.AppImage
-chmod 777 PollyMC-Linux-x86_64.AppImage
-printf "\n\nalias pollymc=~/java/PollyMC-Linux-x86_64.AppImage" >> ~/.bashrc
+chmod u+x PollyMC-Linux-x86_64.AppImage
+printf "\nalias pollymc=~/.local/share/PollyMC/PollyMC-Linux-x86_64.AppImage" >> ~/.bashrc
 
-wget https://builds.openlogic.com/downloadJDK/openlogic-openjdk/21.0.3+9/openlogic-openjdk-21.0.3+9-linux-x64.tar.gz
-wget https://builds.openlogic.com/downloadJDK/openlogic-openjdk/17.0.11+9/openlogic-openjdk-17.0.11+9-linux-x64.tar.gz
-wget https://builds.openlogic.com/downloadJDK/openlogic-openjdk/11.0.23+9/openlogic-openjdk-11.0.23+9-linux-x64.tar.gz
-wget https://builds.openlogic.com/downloadJDK/openlogic-openjdk/8u412-b08/openlogic-openjdk-8u412-b08-linux-x64.tar.gz
+mkdir ~/.local/share/PollyMC/java
+cd ~/.local/share/PollyMC/java
 
-for i in *.tar.gz;
+read -p "Which Java version would you like to install (8, 11, 17, 21): " -a versions
+
+for i in "${versions[@]}"
 do
-    tar -xvf "${i}"
-    rm "${i}"
+    case "${i}" in
+        8)
+            wget https://builds.openlogic.com/downloadJDK/openlogic-openjdk-jre/8u442-b06/openlogic-openjdk-jre-8u442-b06-linux-x64.tar.gz
+            tar -xvf openlogic-openjdk-jre-8u442-b06-linux-x64.tar.gz
+            rm openlogic-openjdk-jre-8u442-b06-linux-x64.tar.gz
+            mv openlogic-openjdk-jre-8u442-b06-linux-x64 java-8
+        ;;
+        11)
+            wget https://builds.openlogic.com/downloadJDK/openlogic-openjdk-jre/11.0.26+4/openlogic-openjdk-jre-11.0.26+4-linux-x64.tar.gz
+            tar -xvf openlogic-openjdk-jre-11.0.26+4-linux-x64.tar.gz
+            rm openlogic-openjdk-jre-11.0.26+4-linux-x64.tar.gz
+            mv openlogic-openjdk-jre-11.0.26+4-linux-x64
+        ;;
+        17)
+            wget https://builds.openlogic.com/downloadJDK/openlogic-openjdk-jre/17.0.14+7/openlogic-openjdk-jre-17.0.14+7-linux-x64.tar.gz
+            tar -xvf openlogic-openjdk-jre-17.0.14+7-linux-x64.tar.gz
+            rm openlogic-openjdk-jre-17.0.14+7-linux-x64.tar.gz
+            mv openlogic-openjdk-jre-17.0.14+7-linux-x64 java-17
+        ;;
+        21)
+            wget https://builds.openlogic.com/downloadJDK/openlogic-openjdk-jre/21.0.6+7/openlogic-openjdk-jre-21.0.6+7-linux-x64.tar.gz
+            tar -xvf openlogic-openjdk-jre-21.0.6+7-linux-x64.tar.gz
+            rm openlogic-openjdk-jre-21.0.6+7-linux-x64.tar.gz
+            mv openlogic-openjdk-jre-21.0.6+7-linux-x64 java-21
+        ;;
+    esac
 done
 
 exit
